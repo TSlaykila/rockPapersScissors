@@ -27,48 +27,69 @@ function getHumanChoice(){
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(){
-    const humanChoice = getHumanChoice();
+function playRound(choice){
+    const humanChoice = choice;
     const computerChoice = getComputerChoice();
 
     switch (`${humanChoice}-${computerChoice}`) {
         case "1-1":
         case "2-2":
         case "3-3":
-            console.log("Tie! Both of you selected the same weapon");
+            result.textContent = "Tie! Both of you selected the same weapon";
             break;
         case "1-2":
-            console.log("Rock loses to Paper, Computer wins!");
+            result.textContent = "Rock loses to Paper, Computer wins!";
             computerScore++;
             break;
         case "1-3":
-            console.log("Rock wins against Scissors, Human wins!");
+            result.textContent ="Rock wins against Scissors, Human wins!";
             humanScore++;
             break;
         case "2-1":
-            console.log("Paper wins against Rock, Human wins!");
+            result.textContent = "Paper wins against Rock, Human wins!";
             humanScore++;
             break;
         case "2-3":
-            console.log("Paper loses to Scissors, Computer wins!");
+            result.textContent ="Paper loses to Scissors, Computer wins!";
             computerScore++;
             break;
         case "3-1":
-            console.log("Scissors lose to Rock, Computer wins!");
+            result.textContent ="Scissors lose to Rock, Computer wins!";
             computerScore++;
             break;
         case "3-2":
-            console.log("Scissors win against Paper, Human wins!");
+            result.textContent ="Scissors win against Paper, Human wins!";
             humanScore++;
             break;
         default:
             console.log("Invalid choice");
     }
     
-    console.log("Human Score: " + humanScore);
-    console.log( "Computer Score: "+ computerScore)
+    pHuman.textContent =("Human Score: " + humanScore);
+    pComputer.textContent =( "Computer Score: "+ computerScore)
+
+    if (humanScore === 5) {
+        pHuman.innerHTML = ("Human Score: " + humanScore + " <br>The Winnner is the human");
+    } else if (computerScore === 5) {
+        pHuman.innerHTML = ("Human Score: " + humanScore + " <br>The Winnner is the computer");
+    }
 };
 
-for (i = 0; i < 5; i++){
-playRound();
-};
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissor = document.querySelector("#scissor");
+const resultText = document.querySelector(".result");
+const result = document.createElement("p");
+const pComputer = document.createElement("p");
+const pHuman = document.createElement("p");
+
+resultText.appendChild(result);
+resultText.appendChild(pComputer);
+resultText.appendChild(pHuman);
+
+rock.addEventListener("click", () => {playRound(1);}  );
+paper.addEventListener("click",() => {playRound(2);} );
+scissor.addEventListener("click",() =>{playRound(3); } );
+
+
+
